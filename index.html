@@ -4,16 +4,18 @@
     <title>Zendesk's Docker journey - From hey to yay!</title>
     <meta charset="utf-8">
     <style>
-      @import url(https://fonts.googleapis.com/css?family=Lora:400,700);
+      /*@import url(https://fonts.googleapis.com/css?family=Lora:400,700);*/
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
       @import url(https://fonts.googleapis.com/css?family=Roboto+Mono);
 
-      @font-face { font-family: "Lora"; src: url("./fonts/Lora-Regular.ttf"); };
+      /*@font-face { font-family: "Lora"; src: url("./fonts/Lora-Regular.ttf"); };*/
       @font-face { font-family: "Roboto"; src: url("./fonts/Roboto-Regular.ttf"); };
       @font-face { font-family: "Bebas Neue"; src: url("./fonts/BebasNeue Regular.otf"); };
       @font-face { font-family: "Bebas Neue"; src: url("./fonts/BebasNeue Bold.otf"); font-weight: "bold"; };
 
       body {
         font-size: 2em;
+        font-family: 'Droid Serif';
       }
       h1, h2, h3 {
         font-family: "Bebas Neue";
@@ -21,19 +23,36 @@
         letter-spacing: 4px;
       }
       h1 {
+        color: #78A300;
         font-size: 4em !important;
+      }
+      h2 {
+        font-size: 3em !important;
+        margin-top: 0.6em;
+      }
+      #header {
+        border-bottom: 1px solid #ddd;
+        margin-top: 20px;
+      }
+      #header p {
+        color: #999;
+        font-family: "Bebas Neue";
+        font-size: 0.9em !important;
+        margin: -10px 0 0 0;
+        text-align: left;
+        letter-spacing: 4px;
       }
       .remark-code, .remark-inline-code {
         font-family: "Roboto Mono", monospace;
         line-height: 28px;
       }
       .remark-container {
-        background-color: #fff;
+        background-color: #333;
       }
       .remark-slide-content {
-        background-color: #333;
-        color: #fff;
-        font-family: "Lora";
+        background-color: #fff;
+        color: #333;
+        font-family: "Droid Serif";
         letter-spacing: 1px !important;
       }
       .remark-slide-content p,
@@ -54,9 +73,6 @@
         margin: -35px 0 0 0;
         padding: 0;
       }
-      .orange {
-        color: rgb(255, 144, 21);
-      }
     </style>
   </head>
   <body>
@@ -70,20 +86,125 @@ class: center, middle
 
 ---
 
-class: middle, center
+class: center, middle
 
 # Ash McKenzie
 
 <h3 style="margin-top: -40px">Tech Lead DevOps Engineer</h3>
 
+---
+
+# Topics
+
+### POD architecture
+### Deployment
+### Why Docker?
+### Project Meatballs
+### Kubernetes
+### Future
+
+---
+
+# POD architecture
+
+---
+
+layout: true
+
+<div id="header">
+  <p>POD architecture</p>
+</div>
+
+---
+
+## Overview
+
+---
+
+layout: false
+
+# Deployment
+
+---
+
+layout: true
+
+<div id="header">
+  <p>Deployment</p>
+</div>
+
+---
+
+## Samson
+
+* Our (open source) deployment tool
+* [github.com/zendesk/samson](https://github.com/zendesk/samson)
+
+---
+
+layout: false
+
+# Why Docker?
+
+---
+
+layout: true
+
+<div id="header">
+  <p>Why Docker?</p>
+</div>
+
+---
+
+## Overview
+
+---
+
+layout: false
+
+# Project Meatballs
+
+---
+
+layout: true
+
+<div id="header">
+  <p>Project Meatballs?</p>
+</div>
+
+---
+
+layout: false
+
+# Kubernetes
+
+---
+
+layout: true
+
+<div id="header">
+  <p>Kubernetes</p>
+</div>
+
+---
+
+layout: false
+
+# Future
+
+---
+
+layout: true
+
+<div id="header">
+  <p>Future</p>
+</div>
+
+
 <!-- ------------------------------------------------------------------------------------------- -->
 
     </textarea>
-    <!-- <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js"> -->
-    <script src="./js/remark-latest.min.js">
-    </script>
-    <script>
-      var slideshow = remark.create();
-    </script>
+    <script src="./js/remark-latest.min.js"></script>
+    <script>var slideshow = remark.create();</script>
   </body>
 </html>
