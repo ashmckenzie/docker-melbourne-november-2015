@@ -78,10 +78,10 @@
       }
 
       #slide-tips-alpine .logo,
-      #slide-tips-debian .logo {
+      #slide-tips-debian .logo,
+      #slide-tips-percheron .logo {
         float: left;
         margin: 20px 20px 0 0;
-        width: 120px
       }
 
       #slide-thanks h3 {
@@ -178,6 +178,7 @@ class: center, middle
 
 ???
 
+* Now for some context
 * Lets take a minute to talk about Zendesk's pod architecture
 
 ---
@@ -278,28 +279,60 @@ class: topic-template
 
 ## Goals
 
+* Assemble a team of engineers from all offices
 * Rapidly deploy new services & applications with little involvement from Ops
 * Easily scale up instances that run services & applications
 * Leverage cloud providers for speed and flexibility
 
 ???
 
-* Before Docker swarm was stable
+* We've traditionally have not ventured into cloud providers due to data compliancy challenges
 
 ---
 
 ## Implementation
 
-* Utilise Samson
-*
+* Utilised Samson, Docker and consul
+* X agent running on each node watches consul for a new release document
+* Pulls down docker images, builds as described in release document
+* It worked!
+
+---
+
+Release document example:
+
+```json
+{
+  "doc_version": "1.0",
+  "release_id": "10883",
+  "release_author": "Bat Man <batman@zendesk.com>",
+  "release_at": "2015-05-02 22:30:05 +0000",
+  "image": "docker-registry.com/app@sha256:94c02c355ae42a9adc12f3fca6727a2d59afe1d9",
+  "env": {
+    "RAILS_ENV": "production",
+  },
+  "encryption_key": "vault:x_encryption_key_1",
+  "roles": {
+    "resque_worker": {
+      "command": "bundle exec rake resque:worker",
+    }
+  }
+}
+```
 
 ---
 
 ## Outcome
 
-* Working version created
 * Integrated into Samson
-* Ultimately decided to change direction
+* Working version created
+* Ultimately shelved because:
+  * Scaling up instances was still challenging
+  * Other technologies had matured, namely Kubernetes
+
+???
+
+* Before Docker swarm was stable
 
 ---
 
@@ -321,8 +354,19 @@ class: topic-template
 
 ## Why Kubernetes?
 
-* a
-* b
+* Similar core concepts to Project X (release doc vs. pod definition file)
+* Supports Open Container Format (OCF) - Docker & Rocket
+* Maintained by a large group of contributors (560 according to GitHub!)
+
+---
+
+## Xmas 2015
+
+First production release!  Stay tuned <i class="twa twa-smile"></i>
+
+???
+
+* Aiming for first production application running using Kubernetes before Xmas.
 
 ---
 
@@ -441,6 +485,19 @@ $ docker run -ti docker_demo
 ???
 
 * This Procfile will run the cron daemon and also tail the application and cron logs, very useful!
+
+---
+
+name: tips-percheron
+
+## Percheron
+
+<img class="logo" src="./images/percheron-logo.png" width="24%" style="position: relative; top: -35px" />
+
+[github.com/ashmckenzie/percheron](https://github.com/ashmckenzie/percheron)
+
+<br/><br/>
+Looking for a Fig alternative?  Try Percheron, written in Ruby, by me <i class="twa twa-smile"></i>
 
 ---
 
