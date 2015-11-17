@@ -66,6 +66,9 @@
       .remark-slide-number {
         font-size: 0.45em;
       }
+      .remark-notes {
+        font-size: 1.5em;
+      }
       p.image-attribution {
         color: #777;
         font-size: 0.5em;
@@ -297,9 +300,14 @@ A minimal Docker image based on Alpine Linux with a complete package index and o
 
 [github.com/chrismytton/shoreman](https://github.com/chrismytton/shoreman)
 
+Bash implementation of Foreman that parses a file called `Procfile` without the need for Ruby.
+
+Procfiles are portable and parseable by Foreman (Ruby), Honcho (Python), Forego (golang), etc.
+
 ???
 
-* Shoreman - bash implementation of Foreman, parses `Procfile` without the need for Ruby
+* Foreman originally developed for the Heroku platform
+* Are you sensing a theme with the project names?!? :)
 
 ---
 
@@ -310,7 +318,24 @@ class: topic-template
 
 ---
 
-`Dockerfile` example
+`Procfile` structure:
+
+```ruby
+<label1>: <command1>
+<label2>: <label2>
+...
+```
+
+Example:
+
+```ruby
+crond:   crond -f -d 6
+app_log: tail -f ${APP_LOG_FILE}
+```
+
+---
+
+`Dockerfile` example:
 
 ```docker
 FROM alpine:latest
@@ -329,7 +354,7 @@ ENTRYPOINT [ "/usr/local/bin/shoreman" ]
 `Procfile` example
 
 ```ruby
-crond: /usr/sbin/crond -f -d 6
+crond:   crond -f -d 6
 app_log: tail -f ${APP_LOG_FILE}
 ```
 
