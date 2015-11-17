@@ -3,6 +3,7 @@
   <head>
     <title>Zendesk's Docker journey - From hey to yay!</title>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="./css/twemoji-awesome.css">
     <style>
       /*@import url(https://fonts.googleapis.com/css?family=Lora:400,700);*/
       @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
@@ -72,9 +73,18 @@
         margin: -35px 0 0 0;
         padding: 0;
       }
+
+      #slide-tips-alpine .logo,
+      #slide-tips-debian .logo {
+        float: left;
+        margin: 20px 20px 0 0;
+        width: 120px
+      }
+
       #slide-thanks h3 {
         line-height: 20px;
       }
+
     </style>
   </head>
   <body>
@@ -86,6 +96,12 @@ class: center, middle
 
 ## From hey to yay!
 
+???
+
+* Thanks for coming
+* First meetup in this amazing space, woohoo!
+* Been in this building exactly 17 days :)
+
 ---
 
 class: center, middle
@@ -94,6 +110,25 @@ class: center, middle
 
 <h3 style="margin-top: -40px">Tech Lead DevOps Engineer</h3>
 
+???
+
+* Bit about me..
+* APAC Tech Lead which includes the Melbourne and Singapore offices
+* At Zendesk 18 months, come from a more software engineering background, prefer the system problem space
+* If I wasn't getting down and dirty with DevOps work, I'd be working with arduino, micro controllers or what is now called the IoT
+
+---
+
+class: center, middle
+
+# Zendesk
+
+???
+
+* Cloud based customer service platform
+* What does that mean?  We help our customers help their customers :)
+* Some of our customers include - Rockstar Games, Uber, Shopify, Groupon, Twilio
+
 ---
 
 # Topics
@@ -101,26 +136,29 @@ class: center, middle
 ### Why Docker?
 ### POD architecture
 ### Deployment
-### Project Meatballs
+### Project X
 ### Kubernetes
 ### Future
 
 ---
 
+layout: false
 class: center, middle
 
 # Why Docker?
 
 ---
 
-layout: true
 class: topic-template
 
 # Why Docker?
 
----
+* `Dockerfile` <i class="twa twa-joy"></i>
+* Application isolation
 
-x
+???
+
+* Dockerfile - a simple yet powerful concept that both developers and admins can leverage
 
 ---
 
@@ -166,14 +204,14 @@ class: topic-template
 layout: false
 class: center, middle
 
-# Project Meatballs
+# Project X
 
 ---
 
 layout: true
 class: topic-template
 
-# Project Meatballs
+# Project X
 
 ---
 
@@ -214,6 +252,108 @@ class: topic-template
 ---
 
 x
+
+---
+
+layout: false
+class: center, middle
+
+# Tips
+
+---
+
+layout: true
+class: topic-template
+
+# Tips
+
+---
+
+name: tips-debian
+
+## `FROM debian:latest`
+
+<img class="logo" src="./images/debian-logo.png" />
+
+Latest Debian, comes in at 119MB.
+
+???
+
+For reference, Ubuntu 14.04 is 179MB
+
+---
+
+name: tips-alpine
+
+## `FROM alpine:latest`
+
+<img class="logo" src="./images/alpine-linux-logo.png" />
+
+A minimal Docker image based on Alpine Linux with a complete package index and only 5 MB in size!
+
+---
+
+## Shoreman
+
+[github.com/chrismytton/shoreman](https://github.com/chrismytton/shoreman)
+
+???
+
+* Shoreman - bash implementation of Foreman, parses `Procfile` without the need for Ruby
+
+---
+
+layout: true
+class: topic-template
+
+# Tips > Shoreman
+
+---
+
+`Dockerfile` example
+
+```docker
+FROM alpine:latest
+ENV APP_LOG_FILE /var/log/uptime.log
+RUN apk --update add bash ca-certificates
+RUN wget https://github.com/chrismytton/shoreman/raw/master/shoreman.sh -O /usr/local/bin/shoreman && \
+chmod 755 /usr/local/bin/shoreman
+RUN echo "*/1 * * * * uptime >> ${APP_LOG_FILE}" | crontab -
+RUN touch /var/log/uptime.log
+COPY Procfile /
+ENTRYPOINT [ "/usr/local/bin/shoreman" ]
+```
+
+---
+
+`Procfile` example
+
+```ruby
+crond: /usr/sbin/crond -f -d 6
+app_log: tail -f ${APP_LOG_FILE}
+```
+
+Output:
+
+```shell
+$ docker build -t docker_demo
+$ docker run -ti docker_demo
+01:26:44 crond	| '/usr/sbin/crond -f -d 6' started with pid 6
+01:26:44 crond	| crond: crond (busybox 1.23.2) started, log level 6
+01:26:44 app_log	| 'tail -f ${APP_LOG_FILE}' started with pid 12
+01:27:00 crond	| crond: USER root pid  19 cmd uptime >> /var/log/uptime.log
+01:27:00 app_log	| 01:27:00 up  9:54,  0 users,  load average: 0.00, 0.01, 0.04
+```
+
+???
+
+* This Procfile will run the cron daemon and also tail the application and cron logs, very useful!
+
+---
+
+layout: false
+
+use `ON`x
 
 ---
 
