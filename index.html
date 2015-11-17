@@ -156,12 +156,16 @@ class: topic-template
 
 # Why Docker?
 
-* `Dockerfile` <i class="twa twa-joy"></i>
+<br/>
+* `Dockerfile`, so easy! <i class="twa twa-joy"></i>
 * Application isolation
+* Application and operating environment described in a single repository <i class="twa twa-joy"></i> <i class="twa twa-joy"></i>
+* Docker Hub
 
 ???
 
-* Dockerfile - a simple yet powerful concept that both developers and admins can leverage
+* Dockerfile - a simple yet powerful concept that both developers and sysadmins can leverage
+* The beautiful feeling of describing your application and your operating environment in a single repository
 
 ---
 
@@ -170,6 +174,10 @@ class: center, middle
 
 # POD architecture
 
+???
+
+* Lets take a minute to talk about Zendesk's pod architecture
+
 ---
 
 layout: true
@@ -177,9 +185,16 @@ class: topic-template
 
 # POD architecture
 
+???
+
+* Here's a rough overview of a pod
+* A Pod is a self-containted Zendesk stack that we have duplicated in 11 locations all over the world
+
 ---
 
-x
+<img src="./images/zendesk-pod.png" />
+
+???
 
 ---
 
@@ -201,6 +216,15 @@ class: topic-template
 
 * Our (open source) deployment tool
 * [github.com/zendesk/samson](https://github.com/zendesk/samson)
+
+---
+
+layout: true
+class: topic-template
+
+# Deployment > Samson
+
+---
 
 ---
 
@@ -373,12 +397,6 @@ $ docker run -ti docker_demo
 ???
 
 * This Procfile will run the cron daemon and also tail the application and cron logs, very useful!
-
----
-
-layout: false
-
-use `ON`x
 
 ---
 
